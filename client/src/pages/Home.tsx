@@ -19,10 +19,11 @@ export default function Home() {
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   // Fetch a random quote based on the selected level
-  const { data: quote, isLoading, isError } = useQuery({
-    queryKey: [`/api/quotes/random?level=${level}`, refreshTrigger],
-    retry: 1,
-  });
+  const { data: quote, isLoading, isError } = useQuery<Quote | null>({
+  queryKey: [`/api/quotes/random?level=${level}`, refreshTrigger],
+  retry: 1,
+});
+
 
   // Function to get a new quote for the current level
   const handleNewQuote = () => {
