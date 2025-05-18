@@ -1,1 +1,14 @@
+{
+  "include": ["./**/*"],
+  "exclude": ["../node_modules", "../client", "../shared", "./dist", "**/*.test.ts"],
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
+}
 
