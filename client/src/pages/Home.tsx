@@ -1,4 +1,10 @@
 import { useState } from "react";
+
+interface Quote {
+  id: string;
+  text: string;
+  level: string;
+}
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RoastLevelSelector from "@/components/RoastLevelSelector";
@@ -9,13 +15,6 @@ import { Button } from "@/components/ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
 export default function Home() {
-  interface Quote {
-  id: string;
-  text: string;
-  level: string;
-}
-
-  const [quote, setQuote] = useState<Quote | null>(null);
   const [level, setLevel] = useState(1);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
