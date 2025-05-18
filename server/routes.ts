@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { getLevelParamSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
+import { ZodError } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API route to get a random quote for a specific level
@@ -21,10 +22,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       return res.json(quote);
-    } catch (error) {
-      if (error instanceof Error) {
+    } catch (error) { // <-- you need this catch block, not after the return!
+      if (error instanceof ZodError) {
         const validationError = fromZodError(error);
-        return res.status(400).json({ 
+        return res.status(400).json({
           message: validationError.message || "Invalid level parameter"
         });
       }
@@ -43,7 +44,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       return res.json(quotes);
     } catch (error) {
-      if (error instanceof Error) {
+      if (error instanceof ZodError) { // <-- use ZodError here too!
         const validationError = fromZodError(error);
         return res.status(400).json({ 
           message: validationError.message || "Invalid level parameter"
